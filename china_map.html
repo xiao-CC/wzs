@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <title>Awesome-pyecharts</title>
                 <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
-            <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/maps/ji2_lin2_chang2_chun1.js"></script>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/maps/china.js"></script>
 
     
 </head>
 <body >
-    <div id="6b5c3c9715f8475b8d11ad67bd31033b" class="chart-container" style="width:900px; height:500px; "></div>
+    <div id="china_map" class="chart-container" style="width:900px; height:500px; "></div>
     <script>
-        var chart_6b5c3c9715f8475b8d11ad67bd31033b = echarts.init(
-            document.getElementById('6b5c3c9715f8475b8d11ad67bd31033b'), 'white', {renderer: 'canvas'});
-        var option_6b5c3c9715f8475b8d11ad67bd31033b = {
+        var chart_china_map = echarts.init(
+            document.getElementById('china_map'), 'white', {renderer: 'canvas'});
+            
+        chart_china_map.on('click', function (params) {
+            var provinceName = params.name;
+            window.location.href = provinceName + '_map.html';
+        });               
+    
+        var option_china_map = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -39,25 +45,149 @@
     "series": [
         {
             "type": "map",
-            "name": "\u4e1a\u52a1\u91cf",
+            "name": "\u4e2d\u56fd",
             "label": {
                 "show": true,
                 "margin": 8,
                 "valueAnimation": false
             },
-            "map": "\u957f\u6625",
+            "map": "china",
             "data": [
                 {
-                    "name": "\u5e7f\u5dde\u5e02",
-                    "value": 150
+                    "name": "\u5317\u4eac",
+                    "value": 1
                 },
                 {
-                    "name": "\u6df1\u5733\u5e02",
-                    "value": 120
+                    "name": "\u5929\u6d25",
+                    "value": 1
                 },
                 {
-                    "name": "\u73e0\u6d77\u5e02",
-                    "value": 30
+                    "name": "\u4e0a\u6d77",
+                    "value": 1
+                },
+                {
+                    "name": "\u91cd\u5e86",
+                    "value": 1
+                },
+                {
+                    "name": "\u6cb3\u5317",
+                    "value": 1
+                },
+                {
+                    "name": "\u6cb3\u5357",
+                    "value": 1
+                },
+                {
+                    "name": "\u4e91\u5357",
+                    "value": 1
+                },
+                {
+                    "name": "\u8fbd\u5b81",
+                    "value": 1
+                },
+                {
+                    "name": "\u9ed1\u9f99\u6c5f",
+                    "value": 1
+                },
+                {
+                    "name": "\u6e56\u5357",
+                    "value": 1
+                },
+                {
+                    "name": "\u5b89\u5fbd",
+                    "value": 1
+                },
+                {
+                    "name": "\u5c71\u4e1c",
+                    "value": 1
+                },
+                {
+                    "name": "\u65b0\u7586",
+                    "value": 1
+                },
+                {
+                    "name": "\u6c5f\u82cf",
+                    "value": 1
+                },
+                {
+                    "name": "\u6d59\u6c5f",
+                    "value": 1
+                },
+                {
+                    "name": "\u6c5f\u897f",
+                    "value": 1
+                },
+                {
+                    "name": "\u6e56\u5317",
+                    "value": 1
+                },
+                {
+                    "name": "\u5e7f\u897f",
+                    "value": 1
+                },
+                {
+                    "name": "\u7518\u8083",
+                    "value": 1
+                },
+                {
+                    "name": "\u5c71\u897f",
+                    "value": 1
+                },
+                {
+                    "name": "\u5185\u8499\u53e4",
+                    "value": 1
+                },
+                {
+                    "name": "\u9655\u897f",
+                    "value": 1
+                },
+                {
+                    "name": "\u5409\u6797",
+                    "value": 1
+                },
+                {
+                    "name": "\u798f\u5efa",
+                    "value": 1
+                },
+                {
+                    "name": "\u8d35\u5dde",
+                    "value": 1
+                },
+                {
+                    "name": "\u5e7f\u4e1c",
+                    "value": 1
+                },
+                {
+                    "name": "\u9752\u6d77",
+                    "value": 1
+                },
+                {
+                    "name": "\u897f\u85cf",
+                    "value": 1
+                },
+                {
+                    "name": "\u56db\u5ddd",
+                    "value": 1
+                },
+                {
+                    "name": "\u5b81\u590f",
+                    "value": 1
+                },
+                {
+                    "name": "\u6d77\u5357",
+                    "value": 1
+                },
+                {
+                    "name": "\u53f0\u6e7e",
+                    "value": 1
+                },
+                {
+                    "name": "\u9999\u6e2f",
+                    "value": 1
+                },
+                {
+                    "name": "\u6fb3\u95e8",
+                    "value": 1
                 }
             ],
             "roam": true,
@@ -77,7 +207,7 @@
     "legend": [
         {
             "data": [
-                "\u4e1a\u52a1\u91cf"
+                "\u4e2d\u56fd"
             ],
             "selected": {},
             "show": true,
@@ -126,7 +256,7 @@
     "title": [
         {
             "show": true,
-            "text": "\u4e1a\u52a1\u91cf\u5206\u5e03",
+            "text": "\u4e2d\u56fd\u5730\u56fe",
             "target": "blank",
             "subtarget": "blank",
             "padding": 5,
@@ -137,14 +267,10 @@
         }
     ],
     "visualMap": {
-        "show": true,
+        "show": false,
         "type": "continuous",
         "min": 0,
-        "max": 150,
-        "range": [
-            0,
-            150
-        ],
+        "max": 100,
         "inRange": {
             "color": [
                 "#50a3ba",
@@ -164,7 +290,7 @@
         "borderWidth": 0
     }
 };
-        chart_6b5c3c9715f8475b8d11ad67bd31033b.setOption(option_6b5c3c9715f8475b8d11ad67bd31033b);
+        chart_china_map.setOption(option_china_map);
     </script>
 </body>
 </html>
