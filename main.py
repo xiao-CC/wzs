@@ -1,38 +1,56 @@
 from pyecharts import options as opts
 from pyecharts.charts import Map
+import pandas as pd
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+
+
+# 弹出文件选择对话框
+file_path = askopenfilename(
+    title="选择业务数据文件",  # 对话框标题
+    filetypes=[("Excel 文件", "*.xlsx *.xls"), ("所有文件", "*.*")]  # 文件类型过滤
+)
+
+# 检查用户是否选择了文件
+if file_path:
+    # 读取 Excel 文件
+    df = pd.read_excel(file_path)
+    print("文件读取成功！")
+else:
+    print("未选择文件。")
+
+
 
 # 创建中国地图
-def china_map():
-    provinces = ['北京', '天津', '上海', '重庆', '河北', '河南', '云南', '辽宁', '黑龙江', '湖南', '安徽', '山东', '新疆', '江苏', '浙江', '江西', '湖北', '广西', '甘肃', '山西', '内蒙古', '陕西', '吉林', '福建', '贵州', '广东', '青海', '西藏', '四川', '宁夏', '海南', '台湾', '香港', '澳门']
+def jilin_map():
+    city_data=df.groupby('承保市')[['赔款'].sum/['保费'].sum()]
     
-    # 创建中国地图
-    map_chart = Map(init_opts=opts.InitOpts(chart_id='china_map'))
-    map_chart.add("中国", [list(z) for z in zip(provinces, [1]*len(provinces))], "china")
+    # 创建吉林地图
+    map_chart = Map(init_opts=opts.InitOpts(chart_id='jilin_map'))
+    map_chart.add("吉林", [list(z) for z in zip(city_data, [1]*len(city_data))], "jilin")
     
     map_chart.set_global_opts(
-        title_opts=opts.TitleOpts(title="中国地图"),
-        visualmap_opts=opts.VisualMapOpts(is_show=False),
+        title_opts=opts.TitleOpts(title="吉林省"),
     )
     
     map_chart.add_js_funcs('''
-        chart_china_map.on('click', function (params) {
-            var provinceName = params.name;
-            window.location.href = provinceName + '_map.html';
+        jilin_map.on('click', function (params) {
+            var city = params.name;
+            window.location.href = cityName + '_map.html';
         });               
     ''')
-    map_chart.render("china_map.html")
-china_map()
+    map_chart.render("jilin_map.html")
+jilin_map()
 
 
-# 生成具体省份地图（例如北京）
-def province_map(province):
+# 生成城市地图
+def city_map(city):
     map_chart = Map()
-    map_chart.add(province, [(province, 1)], province)
+    map_chart.add(city, [(city, 1)], city)
     map_chart.set_global_opts(
-        title_opts=opts.TitleOpts(title=f"{province}地图"),
-        visualmap_opts=opts.VisualMapOpts(is_show=False),
+        title_opts=opts.TitleOpts(title=f"{city}地图"),
     )
-    map_chart.render(f"{province}"+"市"+"_map.html")
+    map_chart.render(f"{city}"+"市"+"_map.html")
 
 # 生成某省地图（例如北京）
-province_map("北京")
+city_map("长春农安")
