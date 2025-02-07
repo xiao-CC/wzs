@@ -1,11 +1,20 @@
 from pyecharts import options as opts
 from pyecharts.charts import Map
 import pandas as pd
-from tkinter import Tk
+import os,sys
+import tkinter as tk
 from tkinter.filedialog import askopenfilename
+from cefpython3 import cefpython as cef
 
 
-# 弹出文件选择对话框
+settings = {
+    # 'resources_dir_path': '.\\resource',  # 设置资源文件路径
+}
+cef.Initialize(settings=settings)
+
+
+root = tk.Tk()
+root.withdraw()  # 隐藏主窗口
 file_path = askopenfilename(
     title="选择业务数据文件",  # 对话框标题
     filetypes=[("Excel 文件", "*.xlsx *.xls"), ("所有文件", "*.*")]  # 文件类型过滤
