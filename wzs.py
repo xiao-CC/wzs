@@ -29,22 +29,27 @@ else:
     print("未选择文件。")
 
 
-
-# 创建中国地图
+#创建吉林地图
 def jilin_map():
 
-    city_data = df.groupby('承保市')[['赔款', '保费']].sum().reset_index()
-    city_data['城市赔付率'] = city_data['赔款'] / city_data['保费']
-    city_data_list=city_data[['承保市','城市赔付率']].values.tolist()
+    data = df.groupby('承保市')[['赔款', '保费']].sum().reset_index()
+    data['城市赔付率'] = (data['赔款'] / data['保费']).round(4)*100
+    city_pfv = data[['承保市', '城市赔付率']].values.tolist()
+    city_pk = data[['承保市', '赔款']].values.tolist()
     
     # 创建吉林地图
     jilin_chart = Map(init_opts=opts.InitOpts(chart_id='jilin_map'))
-    # jilin_chart = Map()
-    jilin_chart.add("吉林地图", city_data_list, "吉林")
+    jilin_chart.add("吉林地图", city_pfv, "吉林")
+    
     jilin_chart.set_global_opts(
         title_opts=opts.TitleOpts(title="吉林省"),
-        visualmap_opts=opts.VisualMapOpts(max_=1, min_=0),
+        visualmap_opts=opts.VisualMapOpts(max_=100, min_=0),
+        tooltip_opts=opts.TooltipOpts(
+            formatter='赔付率：{c}%'
+        )
     )
+    # 赔付率: {params.value}<br/>
+    #             赔款: {dict(city_pk).get(params.name, '无数据')}
     
     jilin_chart.add_js_funcs('''
         chart_jilin_map.on('click', function (params) {
