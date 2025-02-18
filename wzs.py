@@ -6,24 +6,21 @@ import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from cefpython3 import cefpython as cef
 
-
-settings = {
-    # 'resources_dir_path': '.\\resource',  # 设置资源文件路径
-}
-cef.Initialize(settings=settings)
-
+# settings = {
+#     'resources_dir_path': '.\\resource',  # 设置资源文件路径
+# }
+# cef.Initialize(settings=settings)
 
 root = tk.Tk()
 root.withdraw()  # 隐藏主窗口
 file_path = askopenfilename(
-    title="选择业务数据文件",  # 对话框标题
+    title="选择业务数据文件",
     filetypes=[("Excel 文件", "*.xlsx *.xls"), ("所有文件", "*.*")]  # 文件类型过滤
 )
 
 # 检查用户是否选择了文件
 if file_path:
-    # 读取 Excel 文件
-    df = pd.read_excel(file_path)
+    df = pd.read_excel(file_path,engine='openpyxl')
     print("文件读取成功！")
 else:
     print("未选择文件。")
@@ -36,6 +33,7 @@ def jilin_map():
     data['城市赔付率'] = (data['赔款'] / data['保费']).round(4)*100
     city_pfv = data[['承保市', '城市赔付率']].values.tolist()
     city_pk = data[['承保市', '赔款']].values.tolist()
+    city_bf=data[['承保市', '保费']].values.tolist()
     
     # 创建吉林地图
     jilin_chart = Map(init_opts=opts.InitOpts(chart_id='jilin_map'))
@@ -48,8 +46,6 @@ def jilin_map():
             formatter='赔付率：{c}%'
         )
     )
-    # 赔付率: {params.value}<br/>
-    #             赔款: {dict(city_pk).get(params.name, '无数据')}
     
     jilin_chart.add_js_funcs('''
         chart_jilin_map.on('click', function (params) {
