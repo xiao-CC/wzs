@@ -1,7 +1,7 @@
 from pyecharts import options as opts
 from pyecharts.charts import Map
 import pandas as pd
-import os,sys
+import os
 import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from cefpython3 import cefpython as cef
