@@ -18,8 +18,9 @@ def jilin_map():
     jilin_chart.add("吉林地图", city_pfv, "吉林")
     
     jilin_chart.set_global_opts(
-        title_opts=opts.TitleOpts(title="吉林省"),
-        visualmap_opts=opts.VisualMapOpts(max_=100, min_=0),
+        title_opts=opts.TitleOpts(title="吉林省业务数据地图", pos_left="center"),
+        visualmap_opts=opts.VisualMapOpts(max_=100, min_=0, range_text=["%"]),
+        legend_opts=opts.LegendOpts(is_show=False),
         tooltip_opts=opts.TooltipOpts(
             formatter='赔付率：{c}%'
         )
@@ -45,7 +46,9 @@ def city_map(city):
     cityMap_chart = Map()
     cityMap_chart.add(city, xian_pfv, city)
     cityMap_chart.set_global_opts(
-        title_opts=opts.TitleOpts(title=f"{city}地图"),
+        title_opts=opts.TitleOpts(title=f"{city}业务数据地图", pos_left="center"),
+        legend_opts=opts.LegendOpts(is_show=False),
+        visualmap_opts=opts.VisualMapOpts(max_=100, min_=0, range_text= ["%"])
     )
 
     os.makedirs("city", exist_ok=True)
